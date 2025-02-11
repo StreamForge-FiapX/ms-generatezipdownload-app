@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: generatezipdownload-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: generatezipdownload
+  template:
+    metadata:
+      labels:
+        app: generatezipdownload
+    spec:
+      containers:
+        - name: generatezipdownload
+          image: 307946636040.dkr.ecr.sa-east-1.amazonaws.com/ms-generatezipdownload-app:latest
+          ports:
+            - containerPort: 8082
+          resources:
+            requests:
+              cpu: "300m"
+              memory: "256Mi"
+            limits:
+              cpu: "1000m"
+              memory: "512Mi"
+          env:
+            - name: REDIS_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: zipdownload-dbcredential-redis-db
+                  key: redis_host
+            - name: REDIS_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: zipdownload-dbcredential-redis-db
+                  key: redis_port
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: zipdownload-dbcredential-redis-db
+                  key: redis_password
