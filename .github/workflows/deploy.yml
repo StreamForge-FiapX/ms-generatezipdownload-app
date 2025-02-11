@@ -1,4 +1,4 @@
-name: Deploy Python App to EKS
+name: Deploy to EKS
 
 on:
   push:
