@@ -69,8 +69,8 @@ jobs:
           redis_port=$(echo $secret | jq -r '.redis_port')
           redis_password=$(echo $secret | jq -r '.redis_password')
           # Criar o secret no Kubernetes
-          kubectl delete secret pagamento-dbcredentials || true  # Para evitar erro caso já exista
-          kubectl create secret generic pagamento-dbcredentials \
+          kubectl delete secret zipdownload-dbcredential-redis-db || true  # Para evitar erro caso já exista
+          kubectl create secret generic zipdownload-dbcredential-redis-db \
             --from-literal=redis_host=$redis_host \
             --from-literal=redis_port=$redis_port \
             --from-literal=redis_password=$redis_password   
