@@ -3,7 +3,7 @@
 ![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=POSTECH-SOAT-SALA11_application-avalanches-pedido-ms&metric=code_smells)
 ![Coverage](https://sonarcloud.io/api/project_badges/measure?project=POSTECH-SOAT-SALA11_application-avalanches-pedido-ms&metric=coverage)
 
-# **Documentação do Microserviço de Compactação e Download de Arquivos: ms-zipfiles-app**
+# **Documentação do Microserviço de Compactação e Download de Arquivos: ms-generatezipdownload-app-app**
 Este documento descreve o fluxo de funcionamento do microserviço responsável por acessar diretórios no bucket S3, compactar arquivos em um único `.zip`, e fornecer uma URL auto-assinada para download. Ele aborda as etapas de desenvolvimento, integrações, papéis no sistema e detalhamento técnico.
 
 ---
@@ -107,48 +107,24 @@ Após identificar o diretório:
 
 #### **Estrutura de Diretórios**
 ```plaintext
-ms-zipfiles-app/
-├── src/
-│   ├── application/
-│   │   ├── ports/
-│   │   │   ├── DirectoryProcessorPort.cs
-│   │   │   ├── MessagePublisherPort.cs
-│   │   │   ├── StoragePort.cs
-│   │   │   └── CachePort.cs
-│   │   └── usecases/
-│   │       ├── ProcessDirectoryUseCase.cs
-│   │       └── GenerateDownloadLinkUseCase.cs
-│   ├── domain/
-│   │   ├── entities/
-│   │   │   ├── Directory.cs
-│   │   │   └── ZipFile.cs
-│   │   ├── exceptions/
-│   │   │   └── DirectoryProcessingException.cs
-│   │   └── services/
-│   │       └── ZipGenerationService.cs
-│   ├── infrastructure/
-│   │   ├── adapters/
-│   │   │   ├── RabbitMqPublisherAdapter.cs
-│   │   │   ├── S3StorageAdapter.cs
-│   │   │   ├── RedisCacheAdapter.cs
-│   │   │   └── DirectoryProcessingAdapter.cs
-│   │   ├── configuration/
-│   │   │   ├── DependencyInjectionConfig.cs
-│   │   │   └── AppSettings.json
-│   │   └── framework/
-│   │       └── KubernetesWorkerService.cs
-│   ├── api/
-│   │   └── DirectoryProcessingController.cs
-│   └── Program.cs
-├── tests/
-│   ├── unit/
-│   ├── integration/
-│   ├── e2e/
-├── kubernetes/
-│   ├── deployment.yaml
-│   ├── service.yaml
-│   ├── hpa.yaml
-└── README.md
+ms-generatezipdownload-app-app/
+├── Dockerfile
+├── README.md
+├── requirements.txt
+├── src
+│   ├── domain
+│   │   ├── repositories.py
+│   │   └── use_cases.py
+│   ├── infrastructure
+│   │   ├── redis_repository.py
+│   │   └── s3_event_parser.py
+│   └── main.py
+└── tests
+    ├── test_lambda_handler.py
+    ├── test_redis_repository.py
+    ├── test_repositories.py
+    ├── test_s3_event_parser.py
+    └── test_use_cases.py
 ```
 
 ---
