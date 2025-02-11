@@ -1,3 +1,8 @@
+![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=POSTECH-SOAT-SALA11_application-avalanches-pedido-ms&metric=alert_status)
+![Bugs](https://sonarcloud.io/api/project_badges/measure?project=POSTECH-SOAT-SALA11_application-avalanches-pedido-ms&metric=bugs)
+![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=POSTECH-SOAT-SALA11_application-avalanches-pedido-ms&metric=code_smells)
+![Coverage](https://sonarcloud.io/api/project_badges/measure?project=POSTECH-SOAT-SALA11_application-avalanches-pedido-ms&metric=coverage)
+
 # **Documentação do Microserviço de Compactação e Download de Arquivos: ms-zipfiles-app**
 Este documento descreve o fluxo de funcionamento do microserviço responsável por acessar diretórios no bucket S3, compactar arquivos em um único `.zip`, e fornecer uma URL auto-assinada para download. Ele aborda as etapas de desenvolvimento, integrações, papéis no sistema e detalhamento técnico.
 
