@@ -61,6 +61,20 @@ jobs:
         run: |
           aws eks update-kubeconfig --region ${{ env.AWS_REGION }} --name ${{ env.EKS_CLUSTER_NAME }}
 
+      - name: Retrieve Secrets from AWS Secrets Manager and create Kubernetes secret
+        run: |
+          secret=$(aws secretsmanager get-secret-value --secret-name zipdownload-dbcredential-redis-db --region sa-east-1 --query SecretString --output text)
+          # Parse o JSON dos segredos
+          redis_host=$(echo $secret | jq -r '.redis_host')
+          redis_port=$(echo $secret | jq -r '.redis_port')
+          redis_password=$(echo $secret | jq -r '.redis_password')
+          # Criar o secret no Kubernetes
+          kubectl delete secret pagamento-dbcredentials || true  # Para evitar erro caso já exista
+          kubectl create secret generic pagamento-dbcredentials \
+            --from-literal=redis_host=$redis_host \
+            --from-literal=redis_port=$redis_port \
+            --from-literal=redis_password=$redis_password   
+            
       # Faz o deploy da aplicação no EKS utilizando os manifests Kubernetes
       - name: Deploy Python App to EKS
         run: |
