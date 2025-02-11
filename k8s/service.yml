@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service
+spec:
+  selector:
+    app: pagamento
+  ports:
+    - port: 8081
+      targetPort: 8081
+      protocol: TCP
+  type: NodePort
+  
