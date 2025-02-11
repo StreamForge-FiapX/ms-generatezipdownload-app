@@ -49,12 +49,12 @@ jobs:
       # Constrói a imagem Docker da aplicação Python
       - name: Build Docker image for Python App
         run: |
-          docker build -t ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/ms-generatezipdownload-app :latest .
+          docker build -t ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/ms-generatezipdownload-app:latest .
 
       # Publica a imagem no ECR
       - name: Push Docker image to ECR
         run: |
-          docker push ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/ms-generatezipdownload-app :latest
+          docker push ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/ms-generatezipdownload-app:latest
 
       # Atualiza o kubeconfig para conectar ao seu cluster EKS
       - name: Update kubeconfig
