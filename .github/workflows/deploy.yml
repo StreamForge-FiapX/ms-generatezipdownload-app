@@ -63,7 +63,7 @@ jobs:
 
       - name: Retrieve Secrets from AWS Secrets Manager and create Kubernetes secret
         run: |
-          secret=$(aws secretsmanager get-secret-value --secret-name zipdownload-dbcredential-redis-db --region sa-east-1 --query SecretString --output text)
+          secret=$(aws secretsmanager get-secret-value --secret-id zipdownload-dbcredential-redis-db --region sa-east-1 --query SecretString --output text)
           # Parse o JSON dos segredos
           redis_host=$(echo $secret | jq -r '.redis_host')
           redis_port=$(echo $secret | jq -r '.redis_port')
